@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advanced Study Mentor AI — Brain System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SECTION: App Shell -->
+  <div class="app-shell">
+    <!-- SECTION: Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark">SM</div>
+        <div class="brand-copy">
+          <h1>Study Mentor Brain System</h1>
+          <p>Your academic command center + mentor</p>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="exam-pill">
+          <span class="label">Main Goal</span>
+          <span class="value" id="header-main-goal">Set your target exam</span>
+        </div>
+        <div class="streak-pill">
+          <span class="label">Streak</span>
+          <span class="value" id="header-streak">0 days</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- SECTION: Left Column - Dashboard Panels -->
+      <section class="column column-dashboard" aria-label="Study dashboard">
+        <div class="panel today-plan" aria-labelledby="today-plan-title">
+          <div class="panel-header">
+            <h2 id="today-plan-title">Today&rsquo;s Plan</h2>
+            <button class="chip-button" id="generate-today-plan-btn" type="button">Auto-generate</button>
+          </div>
+          <ul class="task-list" id="today-plan-list">
+            <!-- Filled dynamically -->
+          </ul>
+          <p class="panel-empty" id="today-plan-empty">No plan yet. Use chat or Auto-generate to start.</p>
+        </div>
+
+        <div class="panel revisions" aria-labelledby="revisions-title">
+          <div class="panel-header">
+            <h2 id="revisions-title">Upcoming Revisions</h2>
+            <span class="panel-subtitle">Spaced repetition schedule</span>
+          </div>
+          <ul class="revision-list" id="revision-list">
+            <!-- Filled dynamically -->
+          </ul>
+          <p class="panel-empty" id="revision-empty">Revisions will appear here once you log study sessions.</p>
+        </div>
+
+        <div class="panel reflections" aria-labelledby="reflections-title">
+          <div class="panel-header">
+            <h2 id="reflections-title">Reflection &amp; Study Log</h2>
+            <button class="chip-button" id="start-reflection-btn" type="button">Start reflection</button>
+          </div>
+          <div class="reflection-list" id="reflection-list">
+            <!-- Latest reflections -->
+          </div>
+          <p class="panel-empty" id="reflection-empty">Your reflections will appear here after each session.</p>
+        </div>
+      </section>
+
+      <!-- SECTION: Center Column - Mentor Chat -->
+      <section class="column column-chat" aria-label="Mentor chat">
+        <!-- Context bar above chat -->
+        <div class="chat-context-bar">
+          <div class="context-item">
+            <span class="label">Today&rsquo;s Focus</span>
+            <span class="value" id="context-today-focus">Not set</span>
+          </div>
+          <div class="context-item">
+            <span class="label">Next Revision</span>
+            <span class="value" id="context-next-revision">None scheduled</span>
+          </div>
+          <div class="context-item">
+            <span class="label">Current Goal</span>
+            <span class="value" id="context-main-goal">Define your main goal</span>
+          </div>
+          <div class="context-item">
+            <span class="label">Progress</span>
+            <span class="value" id="context-progress">0% built</span>
+          </div>
+        </div>
+
+        <div class="chat-surface">
+          <div class="chat-stream" id="chat-stream" aria-live="polite">
+            <!-- Initial mentor message -->
+          </div>
+        </div>
+
+        <!-- Quick actions + input -->
+        <div class="chat-actions">
+          <div class="quick-actions" aria-label="Quick mentor actions">
+            <button type="button" class="qa-btn" data-action="today-plan">Generate Today&rsquo;s Plan</button>
+            <button type="button" class="qa-btn" data-action="log-session">Log a Study Session</button>
+            <button type="button" class="qa-btn" data-action="weak-topics">Review Weak Topics</button>
+            <button type="button" class="qa-btn" data-action="reflection">Start Reflection</button>
+            <button type="button" class="qa-btn" data-action="adjust-plan">Adjust Study Plan</button>
+          </div>
+          <form class="chat-input-row" id="chat-form">
+            <label class="visually-hidden" for="chat-input">Message the mentor</label>
+            <textarea id="chat-input" rows="2" placeholder="Ask your mentor anything about your studies, plans, or doubts..."></textarea>
+            <button type="submit" class="primary-btn">Send</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- SECTION: Right Column - Planner & Progress -->
+      <section class="column column-planner" aria-label="Planner and performance">
+        <div class="panel calendar" aria-labelledby="calendar-title">
+          <div class="panel-header">
+            <h2 id="calendar-title">Planner &amp; Timeline</h2>
+            <span class="panel-subtitle" id="calendar-range-label">This week overview</span>
+          </div>
+          <div class="calendar-timeline" id="calendar-timeline">
+            <!-- Simple 7-day timeline populated via JS -->
+          </div>
+        </div>
+
+        <div class="panel performance" aria-labelledby="performance-title">
+          <div class="panel-header">
+            <h2 id="performance-title">Progress Tracker</h2>
+            <span class="panel-subtitle">Concept mastery snapshot</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="progress-chart" aria-label="Subject mastery chart"></canvas>
+          </div>
+          <ul class="performance-legend" id="performance-legend">
+            <!-- Subject list with mastery levels -->
+          </ul>
+        </div>
+
+        <div class="panel memory" aria-labelledby="memory-title">
+          <div class="panel-header">
+            <h2 id="memory-title">Brain System Memory</h2>
+          </div>
+          <div class="memory-grid">
+            <div class="memory-card">
+              <h3>User Profile</h3>
+              <ul id="memory-profile">
+                <li>Academic Level: <span data-field="level">Not set</span></li>
+                <li>Study Hours/Day: <span data-field="hours">Not set</span></li>
+                <li>Learning Style: <span data-field="style">Not set</span></li>
+              </ul>
+            </div>
+            <div class="memory-card">
+              <h3>Goals</h3>
+              <ul id="memory-goals">
+                <li>Short-Term: <span data-field="short">None yet</span></li>
+                <li>Long-Term: <span data-field="long">None yet</span></li>
+              </ul>
+            </div>
+            <div class="memory-card">
+              <h3>Focus Map</h3>
+              <ul id="memory-map">
+                <li>Subjects tracked: <span data-field="subjects-count">0</span></li>
+                <li>Weak areas: <span data-field="weak-count">0</span></li>
+                <li>Strong areas: <span data-field="strong-count">0</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
