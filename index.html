@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- SECTION: App Shell -->
+  <!-- APP SHELL -->
   <div class="app-shell">
-    <!-- SECTION: Header -->
+
+    <!-- HEADER -->
     <header class="app-header">
       <div class="brand">
         <div class="brand-mark">SM</div>
@@ -18,7 +19,12 @@
           <p>Your academic command center + mentor</p>
         </div>
       </div>
-      <div class="header-meta">
+
+      <!-- HAMBURGER FOR MOBILE -->
+      <div class="hamburger" id="hamburger">&#9776;</div>
+
+      <!-- HEADER META / PILLS -->
+      <div class="header-meta" id="headerMenu">
         <div class="exam-pill">
           <span class="label">Main Goal</span>
           <span class="value" id="header-main-goal">Set your target exam</span>
@@ -30,49 +36,53 @@
       </div>
     </header>
 
+    <!-- MAIN LAYOUT -->
     <main class="layout">
-      <!-- SECTION: Left Column - Dashboard Panels -->
+
+      <!-- LEFT COLUMN: DASHBOARD PANELS -->
       <section class="column column-dashboard" aria-label="Study dashboard">
-        <div class="panel today-plan" aria-labelledby="today-plan-title">
+        <!-- Today’s Plan Panel -->
+        <div class="panel today-plan collapsible" aria-labelledby="today-plan-title">
           <div class="panel-header">
-            <h2 id="today-plan-title">Today&rsquo;s Plan</h2>
+            <h2 id="today-plan-title">Today’s Plan</h2>
             <button class="chip-button" id="generate-today-plan-btn" type="button">Auto-generate</button>
           </div>
-          <ul class="task-list" id="today-plan-list">
-            <!-- Filled dynamically -->
-          </ul>
-          <p class="panel-empty" id="today-plan-empty">No plan yet. Use chat or Auto-generate to start.</p>
+          <div class="panel-content">
+            <ul class="task-list" id="today-plan-list"></ul>
+            <p class="panel-empty" id="today-plan-empty">No plan yet. Use chat or Auto-generate to start.</p>
+          </div>
         </div>
 
-        <div class="panel revisions" aria-labelledby="revisions-title">
+        <!-- Revisions Panel -->
+        <div class="panel revisions collapsible" aria-labelledby="revisions-title">
           <div class="panel-header">
             <h2 id="revisions-title">Upcoming Revisions</h2>
             <span class="panel-subtitle">Spaced repetition schedule</span>
           </div>
-          <ul class="revision-list" id="revision-list">
-            <!-- Filled dynamically -->
-          </ul>
-          <p class="panel-empty" id="revision-empty">Revisions will appear here once you log study sessions.</p>
+          <div class="panel-content">
+            <ul class="revision-list" id="revision-list"></ul>
+            <p class="panel-empty" id="revision-empty">Revisions will appear here once you log study sessions.</p>
+          </div>
         </div>
 
-        <div class="panel reflections" aria-labelledby="reflections-title">
+        <!-- Reflections Panel -->
+        <div class="panel reflections collapsible" aria-labelledby="reflections-title">
           <div class="panel-header">
             <h2 id="reflections-title">Reflection &amp; Study Log</h2>
             <button class="chip-button" id="start-reflection-btn" type="button">Start reflection</button>
           </div>
-          <div class="reflection-list" id="reflection-list">
-            <!-- Latest reflections -->
+          <div class="panel-content">
+            <div class="reflection-list" id="reflection-list"></div>
+            <p class="panel-empty" id="reflection-empty">Your reflections will appear here after each session.</p>
           </div>
-          <p class="panel-empty" id="reflection-empty">Your reflections will appear here after each session.</p>
         </div>
       </section>
 
-      <!-- SECTION: Center Column - Mentor Chat -->
+      <!-- CENTER COLUMN: CHAT -->
       <section class="column column-chat" aria-label="Mentor chat">
-        <!-- Context bar above chat -->
         <div class="chat-context-bar">
           <div class="context-item">
-            <span class="label">Today&rsquo;s Focus</span>
+            <span class="label">Today’s Focus</span>
             <span class="value" id="context-today-focus">Not set</span>
           </div>
           <div class="context-item">
@@ -95,15 +105,15 @@
           </div>
         </div>
 
-        <!-- Quick actions + input -->
         <div class="chat-actions">
           <div class="quick-actions" aria-label="Quick mentor actions">
-            <button type="button" class="qa-btn" data-action="today-plan">Generate Today&rsquo;s Plan</button>
+            <button type="button" class="qa-btn" data-action="today-plan">Generate Today’s Plan</button>
             <button type="button" class="qa-btn" data-action="log-session">Log a Study Session</button>
             <button type="button" class="qa-btn" data-action="weak-topics">Review Weak Topics</button>
             <button type="button" class="qa-btn" data-action="reflection">Start Reflection</button>
             <button type="button" class="qa-btn" data-action="adjust-plan">Adjust Study Plan</button>
           </div>
+
           <form class="chat-input-row" id="chat-form">
             <label class="visually-hidden" for="chat-input">Message the mentor</label>
             <textarea id="chat-input" rows="2" placeholder="Ask your mentor anything about your studies, plans, or doubts..."></textarea>
@@ -112,7 +122,7 @@
         </div>
       </section>
 
-      <!-- SECTION: Right Column - Planner & Progress -->
+      <!-- RIGHT COLUMN: PLANNER & PERFORMANCE -->
       <section class="column column-planner" aria-label="Planner and performance">
         <div class="panel calendar" aria-labelledby="calendar-title">
           <div class="panel-header">
@@ -123,41 +133,13 @@
             <!-- Simple 7-day timeline populated via JS -->
           </div>
         </div>
+      </section>
 
-             </section>
     </main>
   </div>
 
+  <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
   <script src="script.js"></script>
-
- <div class="app-header">
-  <div class="brand"> ... </div>
-  <div class="hamburger" id="hamburger">&#9776;</div> <!-- ☰ -->
-  <div class="header-meta" id="headerMenu">
-    <!-- your other buttons/pills go here -->
-  </div>
-</div>
-  <div class="panel" id="progress-tracker">
-  ...
-</div>
-
-<div class="panel" id="brain-system-memory">
-  ...
-</div>
-
-  <div class="panel today-plan" aria-labelledby="today-plan-title">
-  <div class="panel-header"> ... </div>
-  <div class="panel-content">
-    <ul class="task-list" id="today-plan-list"></ul>
-    <p class="panel-empty" id="today-plan-empty">No plan yet...</p>
-  </div>
-</div>
 </body>
 </html>
-
-
-
-
-
-
