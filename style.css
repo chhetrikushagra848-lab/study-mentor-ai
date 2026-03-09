@@ -862,3 +862,25 @@
     box-shadow: var(--shadow-soft);
   }
 }
+
+/* Mobile menu active state */
+@media (max-width: 768px) {
+  .header-meta.active {
+    display: flex; /* was none by default */
+  }
+}
+
+/* Make panels collapsible */
+@media (max-width: 960px) {
+  .panel.collapsible .panel-header {
+    cursor: pointer;
+  }
+
+  .panel.collapsible .panel-content {
+    display: none;
+  }
+
+  .panel.collapsible.active .panel-content {
+    display: block;
+  }
+}
