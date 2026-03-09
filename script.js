@@ -612,3 +612,6 @@ hamburger.addEventListener('click', () => {
 });
 
   
+
+const performanceLegendEl = document.getElementById("performance-legend");
+// Remove renderProgressChart() calls if you want
