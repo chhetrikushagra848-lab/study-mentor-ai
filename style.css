@@ -835,3 +835,30 @@
     display: none; /* hide secondary info in mobile header */
   }
 }
+.hamburger {
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: none; /* hidden on desktop */
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .header-meta {
+    display: none; /* hide menu by default on mobile */
+    flex-direction: column;
+    gap: var(--space-2);
+    position: absolute;
+    top: 56px;
+    right: 0;
+    background-color: var(--color-surface-alt);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+  }
+}
