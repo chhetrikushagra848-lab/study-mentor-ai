@@ -623,3 +623,13 @@ const headerMenuEl = document.querySelector(".header-meta");
 hamburgerEl.addEventListener("click", () => {
   headerMenuEl.classList.toggle("active"); // toggles visibility
 });
+
+
+// COLLAPSIBLE PANELS
+document.querySelectorAll(".panel").forEach(panel => {
+  panel.addEventListener("click", () => {
+    if (window.innerWidth <= 960) { // only on mobile
+      panel.classList.toggle("active");
+    }
+  });
+});
