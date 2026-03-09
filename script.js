@@ -615,3 +615,11 @@ hamburger.addEventListener('click', () => {
 
 const performanceLegendEl = document.getElementById("performance-legend");
 // Remove renderProgressChart() calls if you want
+
+// MOBILE HAMBURGER MENU TOGGLE
+const hamburgerEl = document.getElementById("hamburger");
+const headerMenuEl = document.querySelector(".header-meta");
+
+hamburgerEl.addEventListener("click", () => {
+  headerMenuEl.classList.toggle("active"); // toggles visibility
+});
