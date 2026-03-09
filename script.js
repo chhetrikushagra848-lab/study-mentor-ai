@@ -599,4 +599,16 @@ const state = {
     updateHeaderAndContext();
     initialMentorMessage();
   });
+
+const hamburger = document.getElementById('hamburger');
+const headerMenu = document.getElementById('headerMenu');
+
+hamburger.addEventListener('click', () => {
+  if(headerMenu.style.display === 'flex') {
+    headerMenu.style.display = 'none';
+  } else {
+    headerMenu.style.display = 'flex';
+  }
+});
+
   
